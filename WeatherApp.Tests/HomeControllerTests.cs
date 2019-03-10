@@ -1,4 +1,5 @@
 using System;
+using WeatherApp.Controllers;
 using Xunit;
 
 namespace WeatherApp.Tests
@@ -6,9 +7,12 @@ namespace WeatherApp.Tests
     public class HomeControllerTests
     {
         [Fact]
-        public void Test1()
+        public void CanExecuteIndex()
         {
+            var controller = new HomeController();
+            var result = controller.Index();
 
+            Assert.NotNull(result);
         }
     }
 }
