@@ -15,8 +15,8 @@ namespace WeatherApp.Models
         public double TempMin { get; set; }
         public int Pressure { get; set; }
         public int Humidity { get; set; }
-        public int Sunrise { get; set; }
-        public int Sunset { get; set; }
+        public long Sunrise { get; set; }
+        public long Sunset { get; set; }
 
     }
 }

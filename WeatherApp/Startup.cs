@@ -33,6 +33,7 @@ namespace WeatherApp
             });
 
             services.AddTransient<IWeatherProvider, OpenWeatherMap>();
+            services.AddTransient<UnixTimestampConversor>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

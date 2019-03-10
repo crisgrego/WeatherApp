@@ -10,7 +10,6 @@ namespace WeatherApp.Models
     public class WeatherSearchViewModel
     {
         [Required]
-        [DisplayName("city, Country")]
         public string City { get; set; }
 
         public WeatherViewModel Result { get; set; }
