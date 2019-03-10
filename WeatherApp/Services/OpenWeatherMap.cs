@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WeatherApp.Models;
 
 namespace WeatherApp.Services
 {
@@ -18,7 +19,7 @@ namespace WeatherApp.Services
             key = conf["WeatherApis:OpenWeatherMap:Key"];
         }
 
-        public async Task<string> GetWeatherJson(string city)
+        public async Task<WeatherViewModel> GetWeather(string city)
         {
             using (var client = new HttpClient())
             {
@@ -27,8 +28,27 @@ namespace WeatherApp.Services
                 response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();
-                return json;
+                return ParseJson(json);
             }
+        }
+
+        public WeatherViewModel ParseJson(string cityWeather)
+        {
+            dynamic city = JObject.Parse(cityWeather);
+
+            return new WeatherViewModel()
+            {
+                Location = $"{city.name}, {city.sys.country}",
+                IconCode = city.weather[0].icon,
+                Description = city.weather[0].description,
+                TempCurrent = city.main.temp,
+                TempMax = city.main.temp_max,
+                TempMin = city.main.temp_min,
+                Pressure = city.main.pressure,
+                Humidity = city.main.humidity,
+                Sunrise = city.sys.sunrise,
+                Sunset = city.sys.sunset
+            };
         }
     }
 }

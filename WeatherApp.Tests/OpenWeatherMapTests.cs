@@ -15,7 +15,7 @@ namespace WeatherApp.Tests
         {
             var openWeather = new OpenWeatherMap(Configuration.Default());
 
-            var result = openWeather.GetWeatherJson(city);
+            var result = openWeather.GetWeather(city);
 
             Assert.NotNull(result);
         }

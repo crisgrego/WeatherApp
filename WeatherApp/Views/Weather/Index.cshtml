@@ -1,0 +1,32 @@
+﻿@model WeatherApp.Models.WeatherSearchViewModel
+
+<div>
+    <form asp-action="Info" method="get" >
+        <div class="form-group">
+            <label asp-for="City">Name:</label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="alert-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+@if(Model != null && Model.Result != null)
+{
+    var result = @Model.Result;
+
+    <div>
+        <div>@result.Location</div>
+        <div>            
+            <img src="http://openweathermap.org/img/w/@(result.IconCode).png" alt="Weather Icon" />
+        </div>
+        <div>@result.Description</div>
+        <div>@result.TempCurrent</div>
+        <div>@result.TempMax</div>
+        <div>@result.TempMin</div>
+        <div>@result.Pressure</div>
+        <div>@result.Humidity</div>
+        <div>@result.Sunrise</div>
+        <div>@result.Sunset</div>
+    </div>
+}
